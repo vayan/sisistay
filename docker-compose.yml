@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  api:
+    build: .
+    ports:
+      - 8080:8080
+    links:
+      - postgres
+    volumes:
+      - ./:/go/src/github.com/vayan/sisistay
+
+  postgres:
+    image: postgres:11
+    restart: always
+    environment:
+        POSTGRES_USER: victoria
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: godb
