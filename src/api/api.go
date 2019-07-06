@@ -13,6 +13,7 @@ import (
 )
 
 type Config struct {
+	Port         string
 	OrderStorage model.OrderStorage
 	RouteFetcher service.RouteFetcher
 	router       *mux.Router
@@ -52,7 +53,7 @@ func (c Config) ListenAndServe() error {
 
 	server := &http.Server{
 		Handler:      c.router,
-		Addr:         ":8080",
+		Addr:         ":" + c.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}

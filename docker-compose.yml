@@ -11,6 +11,12 @@ services:
       - ./:/go/src/github.com/vayan/sisistay
     environment:
       GOOGLE_API_KEY: "${GOOGLE_API_KEY}"
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: victoria
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: godb
+      POSTGRES_PORT: 5432
+      PORT: 8080
 
   postgres:
     image: postgres:11

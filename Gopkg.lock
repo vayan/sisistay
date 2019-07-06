@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:71be6302fa0607e391a2b8a2b763eb5b624ee65add3966984cb3a9465faf51df"
+  name = "github.com/caarlos0/env"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4bd75bf16b9ef8c1383109b5e4d931bd72c3b6d0"
+  version = "v6.0.0"
+
+[[projects]]
   digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
   name = "github.com/google/uuid"
   packages = ["."]
@@ -207,6 +215,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/caarlos0/env",
     "github.com/gorilla/mux",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/postgres",
