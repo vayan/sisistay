@@ -25,9 +25,13 @@
 #   unused-packages = true
 
 [prune]
-  go-tests = true
-  unused-packages = true
+    go-tests = true
+    unused-packages = true
+
+[[override]]
+    source = "https://github.com/fsnotify/fsnotify/archive/v1.4.7.tar.gz"
+    name = "gopkg.in/fsnotify.v1"
 
 [[constraint]]
-  name = "github.com/jinzhu/gorm"
-  version = "1.9.10"
+    name = "github.com/jinzhu/gorm"
+    version = "1.9.10"

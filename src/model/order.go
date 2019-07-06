@@ -14,3 +14,15 @@ type Order struct {
 	Distance int
 	Status
 }
+
+type OrderStorage interface {
+	Migrate()
+}
+
+type OrderDatabase struct {
+	Database *gorm.DB
+}
+
+func (o OrderDatabase) Migrate() {
+	o.Database.AutoMigrate(Order{})
+}
