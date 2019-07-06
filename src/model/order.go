@@ -2,21 +2,22 @@ package model
 
 import "github.com/jinzhu/gorm"
 
-type Status int
+type OrderStatus string
 
 const (
-	Unassigned Status = iota + 1
-	Assigned
+	OrderUnassigned OrderStatus = "UNASSIGNED"
+	OrderAssigned   OrderStatus = "ASSIGNED"
 )
 
 type Order struct {
-	gorm.Model
-	Distance int
-	Status
+	ID             uint        `gorm:"primary_key" json:"id"`
+	DistanceMeters int         `json:"distance"`
+	Status         OrderStatus `json:"status"`
 }
 
 type OrderStorage interface {
 	Migrate()
+	Create(order *Order)
 }
 
 type OrderDatabase struct {
@@ -25,4 +26,8 @@ type OrderDatabase struct {
 
 func (o OrderDatabase) Migrate() {
 	o.Database.AutoMigrate(Order{})
+}
+
+func (o OrderDatabase) Create(order *Order) {
+	o.Database.Create(order)
 }
