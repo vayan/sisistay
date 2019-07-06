@@ -9,6 +9,8 @@ services:
       - postgres
     volumes:
       - ./:/go/src/github.com/vayan/sisistay
+    environment:
+      GOOGLE_API_KEY: "${GOOGLE_API_KEY}"
 
   postgres:
     image: postgres:11

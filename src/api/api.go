@@ -7,10 +7,12 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/vayan/sisistay/src/api/createorder"
 	"github.com/vayan/sisistay/src/model"
+	"github.com/vayan/sisistay/src/service"
 )
 
 type Config struct {
 	OrderStorage model.OrderStorage
+	RouteFetcher service.RouteFetcher
 	router       *mux.Router
 }
 
@@ -23,7 +25,7 @@ func (c *Config) CreateRoute() {
 
 	c.router.Handle(
 		"/orders",
-		createorder.CreateController(c.OrderStorage),
+		createorder.CreateController(c.OrderStorage, c.RouteFetcher),
 	).Methods("POST")
 }
 

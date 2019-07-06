@@ -49,4 +49,10 @@ var _ = Describe("Coordinate", func() {
 			})
 		})
 	})
+
+	Describe(".ToString()", func() {
+		It("joins to coordinates", func() {
+			Expect(model.Coordinates{"11", "-181"}.ToString()).To(Equal("11,-181"))
+		})
+	})
 })

@@ -13,6 +13,11 @@ Hello :wave:
 
 ### Get Started
 
+Create a `.env` file at the root of the repo with
+`GOOGLE_API_KEY=mygreatsecret`
+
+`echo "GOOGLE_API_KEY=replaceme" > .env`
+
 run `./start.sh` to run the docker-compose file to start a PostgreSQL
 instance and a Go HTTP API.
 
@@ -30,3 +35,4 @@ I tried to keep then minimal:
 * `gorilla/mux` for HTTP routing
 * `Gomega/Ginkgo` for testing
 * `gorm` as an ORM
+* Go Client for Google Maps Services

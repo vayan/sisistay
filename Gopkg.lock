@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
+  name = "github.com/google/uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0cd6bf5da1e1c83f8b45653022c74f71af0538a4"
+  version = "v1.1.1"
+
+[[projects]]
   digest = "1:cbec35fe4d5a4fba369a656a8cd65e244ea2c743007d8f6c1ccb132acf9d1296"
   name = "github.com/gorilla/mux"
   packages = ["."]
@@ -152,6 +160,25 @@
   version = "v0.3.2"
 
 [[projects]]
+  branch = "master"
+  digest = "1:9fdc2b55e8e0fafe4b41884091e51e77344f7dc511c5acedcfd98200003bff90"
+  name = "golang.org/x/time"
+  packages = ["rate"]
+  pruneopts = "UT"
+  revision = "9d24e82272b4f38b78bc8cff74fa936d31ccd8ef"
+
+[[projects]]
+  branch = "master"
+  digest = "1:1321fb581357df9ce2b164f6deaef69c6587dd65258dfd1f036a6474c08c7a2b"
+  name = "googlemaps.github.io/maps"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "e6f6ec24fb77fd3d29ad5741c82e9a4c4a023236"
+
+[[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
   name = "gopkg.in/fsnotify.v1"
   packages = ["."]
@@ -185,6 +212,7 @@
     "github.com/jinzhu/gorm/dialects/postgres",
     "github.com/onsi/ginkgo",
     "github.com/onsi/gomega",
+    "googlemaps.github.io/maps",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

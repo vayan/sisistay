@@ -2,6 +2,7 @@ package model
 
 import (
 	"strconv"
+	"strings"
 )
 
 type Coordinates []string
@@ -33,4 +34,8 @@ func (c Coordinates) Latitude() string {
 
 func (c Coordinates) Longitude() string {
 	return c[1]
+}
+
+func (c Coordinates) ToString() string {
+	return strings.Join(c, ",")
 }

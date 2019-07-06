@@ -5,10 +5,12 @@ import (
 
 	"github.com/vayan/sisistay/src/api/apiutils"
 	"github.com/vayan/sisistay/src/model"
+	"github.com/vayan/sisistay/src/service"
 )
 
-type Controller struct {
+type controller struct {
 	OrderStorage model.OrderStorage
+	RouteFetcher service.RouteFetcher
 }
 
 type RequestPayload struct {
@@ -20,11 +22,14 @@ func (rp RequestPayload) Valid() bool {
 	return rp.Origin.Valid() && rp.Destination.Valid()
 }
 
-func CreateController(dataStore model.OrderStorage) http.Handler {
-	return &Controller{OrderStorage: dataStore}
+func CreateController(dataStore model.OrderStorage, routeFetcher service.RouteFetcher) http.Handler {
+	return &controller{
+		OrderStorage: dataStore,
+		RouteFetcher: routeFetcher,
+	}
 }
 
-func (c *Controller) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (c *controller) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	httpCode, body := c.handleRequest(r)
 
 	w.Header().Set("Content-Type", "application/json")
@@ -32,7 +37,7 @@ func (c *Controller) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write(body)
 }
 
-func (c *Controller) handleRequest(request *http.Request) (int, []byte) {
+func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	var requestPayload RequestPayload
 
 	err := apiutils.ParseTo(request.Body, &requestPayload)
@@ -43,9 +48,17 @@ func (c *Controller) handleRequest(request *http.Request) (int, []byte) {
 		})
 	}
 
+	distance, err := c.RouteFetcher.GetDistance(requestPayload.Origin, requestPayload.Destination)
+
+	if err != nil {
+		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
+			Error: "NO_ROUTE_AVAILABLE",
+		})
+	}
+
 	order := model.Order{
 		Status:         model.OrderUnassigned,
-		DistanceMeters: 2, // TODO get from Google API
+		DistanceMeters: distance,
 	}
 
 	c.OrderStorage.Create(&order)

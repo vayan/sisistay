@@ -1,6 +1,7 @@
 package createorder_test
 
 import (
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -25,17 +26,28 @@ var _ = Describe("CreateOrder", func() {
 			OrderStorage: test.OrderMockDB{
 				FakeID: 1,
 			},
+			RouteFetcher: test.MockRouteFetcher{
+				Distance: 2,
+				Error:    nil,
+			},
 		}
+	})
+
+	JustBeforeEach(func() {
 		apiConfig.CreateRoute()
 	})
 
 	Describe("POST /orders", func() {
 		Context("With correct request payload", func() {
-			var request, _ = http.NewRequest(
-				"POST",
-				"/orders",
-				strings.NewReader(`{"origin":["11.11", "22.22"],"destination":["11.22","22.22"]}`),
-			)
+			var request *http.Request
+
+			BeforeEach(func() {
+				request, _ = http.NewRequest(
+					"POST",
+					"/orders",
+					strings.NewReader(`{"origin":["11.11", "22.22"],"destination":["11.22","22.22"]}`),
+				)
+			})
 
 			It("returns the correct response", func() {
 				handler := apiConfig.GetHTTPHandler()
@@ -45,6 +57,24 @@ var _ = Describe("CreateOrder", func() {
 
 				Expect(response.Code).To(Equal(200))
 				Expect(response.Body.String()).To(MatchJSON(`{"id":1,"distance":2,"status":"UNASSIGNED"}`))
+			})
+
+			Context("When no route is found", func() {
+				BeforeEach(func() {
+					apiConfig.RouteFetcher = test.MockRouteFetcher{
+						Error: errors.New("cosmic radiation"),
+					}
+				})
+
+				It("returns the correct error", func() {
+					handler := apiConfig.GetHTTPHandler()
+
+					response := httptest.NewRecorder()
+					handler.ServeHTTP(response, request)
+
+					Expect(response.Code).To(Equal(400))
+					Expect(response.Body.String()).To(MatchJSON(`{"error":"NO_ROUTE_AVAILABLE"}`))
+				})
 			})
 		})
 
