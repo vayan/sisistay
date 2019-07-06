@@ -11,7 +11,6 @@ Hello :wave:
 
 ### Requirement
 
-* Go 1.12
 * Docker
 
 ### Get Started
@@ -41,3 +40,8 @@ I tried to keep then minimal:
 * `Gomega/Ginkgo` for testing
 * `gorm` as an ORM
 * Go Client for Google Maps Services
+
+#### Misc
+
+I also included my [postman collection](https://github.com/vayan/sisistay/blob/master/postman_collection.json) I used when developing this.
+You guys must have yours but just in case :smile:
