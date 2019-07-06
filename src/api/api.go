@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/vayan/sisistay/src/api/createorder"
+	"github.com/vayan/sisistay/src/api/takeorder"
 	"github.com/vayan/sisistay/src/model"
 	"github.com/vayan/sisistay/src/service"
 )
@@ -27,6 +28,11 @@ func (c *Config) CreateRoute() {
 		"/orders",
 		createorder.CreateController(c.OrderStorage, c.RouteFetcher),
 	).Methods("POST")
+
+	c.router.Handle(
+		"/orders/{orderID}",
+		takeorder.CreateController(c.OrderStorage),
+	).Methods("PATCH")
 }
 
 func (c *Config) GetHTTPHandler() http.Handler {

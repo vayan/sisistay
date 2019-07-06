@@ -26,7 +26,7 @@ func main() {
 
 	config := api.Config{
 		OrderStorage: model.OrderDatabase{
-			Database: db,
+			Database: db.Debug(),
 		},
 		RouteFetcher: service.GoogleRouteFetcher{
 			APIKey: googleApiKey,

@@ -15,7 +15,7 @@ import (
 
 func TestCreateOrderApi(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Cli Suite")
+	RunSpecs(t, "create order Suite")
 }
 
 var _ = Describe("CreateOrder", func() {
