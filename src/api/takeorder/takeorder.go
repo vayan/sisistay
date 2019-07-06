@@ -41,9 +41,7 @@ func (c *controller) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	vars := mux.Vars(request)
-	orderID := vars["orderID"]
-
-	id, err := strconv.Atoi(orderID)
+	id, err := strconv.Atoi(vars["orderID"])
 
 	if err != nil {
 		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{

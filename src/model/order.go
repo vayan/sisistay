@@ -23,6 +23,7 @@ type OrderStorage interface {
 	Migrate()
 	Create(order *Order)
 	Take(orderID uint) error
+	List(page int, limit int) []Order
 }
 
 type OrderDatabase struct {
@@ -54,4 +55,20 @@ func (o OrderDatabase) Take(orderID uint) error {
 	}
 
 	return nil
+}
+
+func (o OrderDatabase) List(page int, limit int) []Order {
+	var orders []Order
+	var offset int
+
+	if page <= 1 {
+		offset = 0
+	} else {
+		offset = (page - 1) * limit
+	}
+
+	// assuming we order by id
+	o.Database.Order("id asc").Limit(limit).Offset(offset).Find(&orders)
+
+	return orders
 }
