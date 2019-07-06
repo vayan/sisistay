@@ -26,7 +26,9 @@ instance and a Go HTTP API.
 
 API is available at `http://localhost:8080`
 
-To run tests and coverage clone the repo and do `go test ./... -cover`
+To run the tests clone the repo and do `go test ./...`
+
+You can see the coverage on [codecov](https://codecov.io/gh/vayan/sisistay)
 
 
 ### Context for Reviewer
