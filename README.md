@@ -4,6 +4,9 @@
 
 ### Awesome API for Order Management
 
+[![Build Status](https://travis-ci.com/vayan/sisistay.svg?branch=master)](https://travis-ci.com/vayan/sisistay)
+[![codecov](https://codecov.io/gh/vayan/sisistay/branch/master/graph/badge.svg)](https://codecov.io/gh/vayan/sisistay)
+
 Hello :wave:
 
 ### Requirement
