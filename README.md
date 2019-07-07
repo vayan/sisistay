@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.com/vayan/sisistay.svg?branch=master)](https://travis-ci.com/vayan/sisistay)
 [![codecov](https://codecov.io/gh/vayan/sisistay/branch/master/graph/badge.svg)](https://codecov.io/gh/vayan/sisistay)
 
-Hello :wave:
+Hello nice reviewer(s) :wave:
 
 ### Requirement
 
@@ -32,16 +32,37 @@ You can see the coverage on [codecov](https://codecov.io/gh/vayan/sisistay)
 
 ### Context for Reviewer
 
+
+#### Assumptions
+
+* For the distance I assumed we're using cars
+* For the listing I ordered by ID
+
 #### Dependencies
 
-I tried to keep then minimal:
+I tried to keep them minimal:
 
 * `gorilla/mux` for HTTP routing
 * `Gomega/Ginkgo` for testing
 * `gorm` as an ORM
 * Go Client for Google Maps Services
 
+
+#### Improvements
+
+The API controllers/handler could probably be refactored to have a bit less code
+duplication
+
+There's also no authentication
+
 #### Misc
+
+Coverage is only at 80%~~ because I didn't had time to do the setup to have
+a DB for testing, else I would have unit tested all the database related
+functions.
 
 I also included my [postman collection](https://github.com/vayan/sisistay/blob/master/postman_collection.json) I used when developing this.
 You guys must have yours but just in case :smile:
+
+
+Thanks and have a good day :sunflower: !
