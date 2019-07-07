@@ -43,17 +43,13 @@ func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	err := apiutils.ParseTo(request.Body, &requestPayload)
 
 	if err != nil || !requestPayload.Valid() {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "INVALID_PARAMS",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("INVALID_PARAMS")
 	}
 
 	distance, err := c.RouteFetcher.GetDistance(requestPayload.Origin, requestPayload.Destination)
 
 	if err != nil {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "NO_ROUTE_AVAILABLE",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("NO_ROUTE_AVAILABLE")
 	}
 
 	order := model.Order{

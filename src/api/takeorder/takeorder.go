@@ -44,9 +44,7 @@ func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	id, err := strconv.Atoi(vars["orderID"])
 
 	if err != nil {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "INVALID_PARAMS",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("INVALID_PARAMS")
 	}
 
 	var requestPayload RequestPayload
@@ -54,17 +52,13 @@ func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	err = apiutils.ParseTo(request.Body, &requestPayload)
 
 	if err != nil || !requestPayload.Valid() {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "INVALID_PARAMS",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("INVALID_PARAMS")
 	}
 
 	err = c.OrderStorage.Take(uint(id))
 
 	if err != nil {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "CANNOT_BE_TAKEN",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("CANNOT_BE_TAKEN")
 	}
 
 	return 200, apiutils.Serialize(RequestValidResponse{

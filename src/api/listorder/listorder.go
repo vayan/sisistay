@@ -34,9 +34,7 @@ func (c *controller) handleRequest(request *http.Request) (int, []byte) {
 	limit, limitErr := strconv.Atoi(vars["limit"])
 
 	if pageErr != nil || limitErr != nil || page == 0 {
-		return http.StatusBadRequest, apiutils.Serialize(model.ErrorResponse{
-			Error: "INVALID_PARAMS",
-		})
+		return http.StatusBadRequest, model.SerializedErrorResponse("INVALID_PARAMS")
 	}
 
 	orders := c.OrderStorage.List(page, limit)
